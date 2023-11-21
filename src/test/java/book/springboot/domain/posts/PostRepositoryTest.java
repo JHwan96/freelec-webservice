@@ -10,16 +10,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostRepositoryTest {
-    @Autowired PostRepository postRepository;
+    @Autowired
+    PostsRepository postsRepository;
 
     @After
     public void cleanUp(){
-        postRepository.deleteAll();
+        postsRepository.deleteAll();
     }
 
     @Test
@@ -27,14 +26,14 @@ public class PostRepositoryTest {
         //given
         String title = "테스트 게시글";
         String content = "테스트 본문";
-        postRepository.save(Posts.builder()
+        postsRepository.save(Posts.builder()
                 .title(title)
                 .content(content)
                 .author("wnghks@gmail.com")
                 .build());
 
         //when
-        List<Posts> postsList = postRepository.findAll();
+        List<Posts> postsList = postsRepository.findAll();
 
         //then
         Posts posts = postsList.get(0);
